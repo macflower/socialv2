@@ -61,4 +61,19 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    private function mb_ucfirst($str) {
+        $fc = mb_strtoupper(mb_substr($str, 0, 1));
+        return $fc.mb_substr($str, 1);
+    }
+
+    public function getName()
+    {
+        if ($this->first_name && $this->last_name)
+        {
+            return "{$this->mb_ucfirst($this->first_name)} {$this->mb_ucfirst($this->last_name)}";
+        }
+
+        return null;
+    }
 }
