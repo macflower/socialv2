@@ -168,6 +168,7 @@ return [
         'terms'                 => 'соглашение',
         'first_name'            => 'Имя',
         'last_name'             => 'Фамилия',
+        'about'                 => 'О себе',
         'password'              => 'Пароль',
         'password_confirmation' => 'Подтверждение пароля',
         'city'                  => 'Город',

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Str;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -27,6 +28,7 @@ class User extends Authenticatable
         'first_name',
         'last_name',
         'gender',
+        'about',
         'username',
         'email',
         'password',
@@ -62,18 +64,35 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    private function mb_ucfirst($str) {
-        $fc = mb_strtoupper(mb_substr($str, 0, 1));
-        return $fc.mb_substr($str, 1);
+    /**
+    * Get the user's full name
+    *
+    *@return string
+    */
+    public function getFullNameAttribute()
+    {
+        return Str::ucfirst($this->first_name).' '.Str::ucfirst($this->last_name);
     }
 
-    public function getName()
+    /**
+     * Set the user's first name
+     * 
+     * @param string $value
+     * @return void
+     */
+    public function setFirstNameAttribute($value) 
     {
-        if ($this->first_name && $this->last_name)
-        {
-            return "{$this->mb_ucfirst($this->first_name)} {$this->mb_ucfirst($this->last_name)}";
-        }
+        $this->attributes['first_name'] = Str::ucfirst($value);
+    }
 
-        return null;
+    /**
+     * Set the user's last name
+     * 
+     * @param string $value
+     * @return void
+     */
+    public function setLastNameAttribute($value) 
+    {
+        $this->attributes['last_name'] = Str::ucfirst($value);
     }
 }
