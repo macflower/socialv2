@@ -25,8 +25,8 @@ class Register extends Component
     public function next()
     {
         $this->validate([
-            'first_name' => 'required|string|min:4|max:50',
-            'last_name' => 'required|string|min:4|max:50',
+            'first_name' => 'required|string|alpha|min:4|max:50',
+            'last_name' => 'required|string|alpha|min:4|max:50',
             'gender' => 'required|string|regex:/^[mf]$/',
         ]);
 
